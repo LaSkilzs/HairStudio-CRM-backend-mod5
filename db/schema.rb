@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_02_22_195326) do
+ActiveRecord::Schema.define(version: 2019_02_22_212004) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -33,11 +33,12 @@ ActiveRecord::Schema.define(version: 2019_02_22_195326) do
     t.string "name"
     t.string "organization"
     t.boolean "license"
-    t.integer "license_id"
+    t.string "license_id"
     t.datetime "renewal"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "stylist_id"
+    t.integer "hours_completed"
     t.index ["stylist_id"], name: "index_certifications_on_stylist_id"
   end
 
@@ -62,8 +63,6 @@ ActiveRecord::Schema.define(version: 2019_02_22_195326) do
     t.boolean "suffered_from_hair_loss?"
     t.boolean "been_diagnosed_with_alopecia?"
     t.boolean "take_any_medication?"
-    t.string "been_pregnant_in"
-    t.boolean "_the_last_6_months?"
     t.boolean "suffer_from_psoriasis_to_the_scalp?"
     t.boolean "suffer_from_ezcema_to_the_scalp?"
     t.boolean "have_a_sensitive_scalp?"
@@ -71,8 +70,6 @@ ActiveRecord::Schema.define(version: 2019_02_22_195326) do
     t.text "which_ones?"
     t.boolean "frequently_swim_or_go_to_the_gym?"
     t.boolean "currently_have_colour_in_your_hair?"
-    t.string "which"
-    t.text "_method?"
     t.text "last_time_colored?"
     t.boolean "used_hair_extensions_before?"
     t.text "which_type_did_you_use?"
@@ -81,13 +78,15 @@ ActiveRecord::Schema.define(version: 2019_02_22_195326) do
     t.text "wash_frequency?"
     t.text "hair_type"
     t.text "hair_is"
-    t.text "lenght"
     t.bigint "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "stylist_id"
-    t.bigint "hair_personalities_id"
-    t.index ["hair_personalities_id"], name: "index_hair_cards_on_hair_personalities_id"
+    t.text "length"
+    t.boolean "been_pregnant_in_the_last_6_months?"
+    t.text "which_method?"
+    t.bigint "hair_personality_id"
+    t.index ["hair_personality_id"], name: "index_hair_cards_on_hair_personality_id"
     t.index ["stylist_id"], name: "index_hair_cards_on_stylist_id"
     t.index ["user_id"], name: "index_hair_cards_on_user_id"
   end
@@ -203,7 +202,7 @@ ActiveRecord::Schema.define(version: 2019_02_22_195326) do
   add_foreign_key "appointments", "users", column: "stylist_id"
   add_foreign_key "certifications", "users", column: "stylist_id"
   add_foreign_key "galleries", "gallery_categories"
-  add_foreign_key "hair_cards", "hair_personalities", column: "hair_personalities_id"
+  add_foreign_key "hair_cards", "hair_personalities"
   add_foreign_key "hair_cards", "users"
   add_foreign_key "hair_cards", "users", column: "stylist_id"
   add_foreign_key "products", "product_categories"
