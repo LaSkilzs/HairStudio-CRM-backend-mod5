@@ -1,0 +1,2 @@
+class GalleryCategory < ApplicationRecord
+end
