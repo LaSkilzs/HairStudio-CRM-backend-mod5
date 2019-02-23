@@ -18,7 +18,7 @@ namespace :import do
     filename = File.join Rails.root, "db/csv/services.csv"
 
     CSV.foreach(filename, headers: true) do |row|
-      Service.create(name: row['name'], salon_id: row['salon_id'], certification_id: row['certification_id'])
+      Service.create(name: row['name'], salon_id: row['salon_id'].to_i, certification_id: row['certification_id'].to_i)
     end
   end
 
@@ -27,7 +27,7 @@ namespace :import do
     filename = File.join Rails.root, "db/csv/service_types.csv"
 
     CSV.foreach(filename, headers: true) do |row|
-      ServiceType.create(name: row['name'], price: row['price'], service_id: row['service_id'])
+      ServiceType.create(name: row['name'], price: row['price'].to_f, service_id: row['service_id'].to_i)
     end 
   end
 
@@ -36,7 +36,7 @@ namespace :import do
     filename = File.join Rails.root, "db/csv/service_products.csv"
 
     CSV.foreach(filename, headers: true) do |row|
-      ServiceProduct.create(product_id: row["product_id"], service_type_id: row["service_type_id"])
+      ServiceProduct.create(product_id: row["product_id"].to_i, service_type_id: row["service_type_id"].to_i)
     end
   end
 
@@ -45,7 +45,8 @@ namespace :import do
     filename = File.join Rails.root, "db/csv/products.csv"
 
     CSV.foreach(filename, headers: true) do |row|
-      Product.create(name: row['name'], size: row['size'], quantity: row["quantity"], cost: row["cost"], product_category_id: row['product_category_id'])
+
+      Product.create(name: row['name'], size: row['size'], quantity: row["quantity"].to_i, cost: row["cost"].to_f, product_category_id: row['product_category_id'])
     end
   end
 
@@ -63,7 +64,7 @@ namespace :import do
     filename = File.join Rails.root, "db/csv/users.csv"
 
     CSV.foreach(filename, headers: true) do |row|
-      User.create(username: row['username'], password_digest: row['password_digest'], role: row["row"], image: row["image"], salon_id: row['salon_id'])
+      User.create(username: row['username'], password_digest: row['password_digest'], role: row["role"], image: row["image"], salon_id: row['salon_id'].to_i)
     end
   end
 
@@ -102,7 +103,7 @@ namespace :import do
     filename = File.join Rails.root, "db/csv/certifications.csv"
 
     CSV.foreach(filename, headers: true) do |row|
-      Certification.create(name: row['name'], organization: row['orgnization'], hours_completed: row['hours_completed'], license: row['license'], license_id: row['license_id'], renewal: row["renewal"], stylist_id: row['stylist_id'])
+      Certification.create(name: row['name'], organization: row['organization'], hours_completed: row['hours_completed'], license: row['license'], license_id: row['license_id'], renewal: row["renewal"], stylist_id: row['stylist_id'].to_i)
     end
   end
 
@@ -112,7 +113,7 @@ namespace :import do
     filename = File.join Rails.root, "db/csv/appointments.csv"
 
     CSV.foreach(filename, headers: true) do |row|
-    Appointment.create(date: row['date'], start_time: row['start_time'], end_time: row['end_time'], status: row['status'], service_total: row['service_total'], user_id: row['user_id'], stylist_id: row['stylist_id'])
+    Appointment.create(date: row['date'], start_time: row['start_time'], duration: row['duration'], status: row['status'], service_total: row['service_total'], user_id: row['user_id'].to_i, stylist_id: row['stylist_id'].to_i)
     end
   end
 
@@ -121,7 +122,7 @@ namespace :import do
     filename = File.join Rails.root, "db/csv/service_requests.csv"
 
     CSV.foreach(filename, headers: true) do |row|
-      ServiceRequest.create(hairstyle: row['hairstyle'], appointment_id: row['appointment_id'], service_type_id: row['service_type_id'])
+      ServiceRequest.create(hairstyle: row['hairstyle'], appointment_id: row['appointment_id'].to_i, service_type_id: row['service_type_id'].to_i)
     end
   end
 
@@ -130,7 +131,7 @@ namespace :import do
     filename = File.join Rails.root, "db/csv/galleries.csv"
 
     CSV.foreach(filename, headers: true) do |row|
-      Gallery.create(image: row['image'], gallery_category_id: row['gallery_category_id'], gallerable_id: row['gallerable_id'], gallerable_type: row['gallerable_type'])
+      Gallery.create(image: row['image'], gallery_category_id: row['gallery_category_id'].to_i, gallerable_id: row['gallerable_id'].to_i, gallerable_type: row['gallerable_type'])
     end
   end
 
