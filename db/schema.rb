@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_02_22_212004) do
+ActiveRecord::Schema.define(version: 2019_02_23_023317) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -18,13 +18,13 @@ ActiveRecord::Schema.define(version: 2019_02_22_212004) do
   create_table "appointments", force: :cascade do |t|
     t.datetime "date"
     t.datetime "start_time"
-    t.datetime "end_time"
-    t.integer "status"
+    t.string "status"
     t.float "service_total"
     t.bigint "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "stylist_id"
+    t.string "duration"
     t.index ["stylist_id"], name: "index_appointments_on_stylist_id"
     t.index ["user_id"], name: "index_appointments_on_user_id"
   end
@@ -76,13 +76,13 @@ ActiveRecord::Schema.define(version: 2019_02_22_212004) do
     t.boolean "have_a_perm_or_relaxer?"
     t.boolean "last_time_you_had_a_relaxer?"
     t.text "wash_frequency?"
-    t.text "hair_type"
-    t.text "hair_is"
+    t.string "hair_type"
+    t.string "hair_is"
     t.bigint "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "stylist_id"
-    t.text "length"
+    t.string "length"
     t.boolean "been_pregnant_in_the_last_6_months?"
     t.text "which_method?"
     t.bigint "hair_personality_id"
@@ -191,7 +191,7 @@ ActiveRecord::Schema.define(version: 2019_02_22_212004) do
     t.string "username"
     t.string "password_digest"
     t.string "image"
-    t.integer "role"
+    t.string "role"
     t.bigint "salon_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
