@@ -3,7 +3,7 @@ FactoryBot.define do
     username { "MyString" }
     password_digest { "MyString" }
     image { "MyString" }
-    role { 1 }
-    salon { nil }
+    role { "client" }
+    salon 
   end
 end
