@@ -5,7 +5,7 @@ FactoryBot.define do
     street_2 { "MyString" }
     city { "MyString" }
     state { "MyString" }
-    phone { "MyString" }
+    phone { "908-786-9876" }
     email { "MyString@example.com" }
     web { "MyString" }
     business_certification { "MyString" }
