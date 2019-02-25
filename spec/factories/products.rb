@@ -4,6 +4,6 @@ FactoryBot.define do
     size { "MyString" }
     quantity { 1 }
     cost { 1.5 }
-    ProductCategory { nil }
+    product_category 
   end
 end
