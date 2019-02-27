@@ -64,7 +64,7 @@ namespace :import do
     filename = File.join Rails.root, "db/csv/users.csv"
 
     CSV.foreach(filename, headers: true) do |row|
-      User.create(username: row['username'], password_digest: row['password_digest'], role: row["role"], image: row["image"], salon_id: row['salon_id'].to_i)
+      User.create(username: row['username'], password: row['password'], role: row["role"], image: row["image"], salon_id: row['salon_id'].to_i)
     end
   end
 
