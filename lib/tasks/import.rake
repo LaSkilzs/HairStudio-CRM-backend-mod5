@@ -73,7 +73,6 @@ namespace :import do
     filename = File.join Rails.root, "db/csv/profiles.csv"
 
     CSV.foreach(filename, headers: true) do |row|
- 
       Profile.create(first_name: row['firstname'], last_name: row['last_name'], birthday: row['birthday'], email: row['email'], home: row['home'], mobile: row['mobile'], street_1: row['street_1'], street_2: row['street_2'], city: row['city'], state: row['state'], zip: row['zip'], user_id: row['user_id'].to_i)
     end
   end
