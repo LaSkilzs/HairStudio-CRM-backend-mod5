@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_02_27_164932) do
+ActiveRecord::Schema.define(version: 2019_02_28_135627) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -32,13 +32,13 @@ ActiveRecord::Schema.define(version: 2019_02_27_164932) do
   create_table "certifications", force: :cascade do |t|
     t.string "name"
     t.string "organization"
-    t.boolean "license"
-    t.string "license_id"
-    t.datetime "renewal"
+    t.boolean "license", default: false
+    t.string "license_id", default: "none"
+    t.date "renewal", default: -> { "CURRENT_TIMESTAMP" }
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "stylist_id"
-    t.integer "hours_completed"
+    t.integer "hours_completed", default: 0
     t.index ["stylist_id"], name: "index_certifications_on_stylist_id"
   end
 
@@ -60,31 +60,31 @@ ActiveRecord::Schema.define(version: 2019_02_27_164932) do
   end
 
   create_table "hair_cards", force: :cascade do |t|
-    t.boolean "suffered_from_hair_loss?"
-    t.boolean "been_diagnosed_with_alopecia?"
-    t.boolean "take_any_medication?"
-    t.boolean "suffer_from_psoriasis_to_the_scalp?"
-    t.boolean "suffer_from_ezcema_to_the_scalp?"
-    t.boolean "have_a_sensitive_scalp?"
-    t.boolean "any_known_allergies?"
-    t.text "which_ones?"
-    t.boolean "frequently_swim_or_go_to_the_gym?"
-    t.boolean "currently_have_colour_in_your_hair?"
-    t.text "last_time_colored?"
-    t.boolean "used_hair_extensions_before?"
-    t.text "which_type_did_you_use?"
-    t.boolean "have_a_perm_or_relaxer?"
-    t.boolean "last_time_you_had_a_relaxer?"
-    t.text "wash_frequency?"
-    t.string "hair_type"
-    t.string "hair_is"
+    t.boolean "suffered_from_hair_loss?", default: false
+    t.boolean "been_diagnosed_with_alopecia?", default: false
+    t.boolean "take_any_medication?", default: false
+    t.boolean "suffer_from_psoriasis_to_the_scalp?", default: false
+    t.boolean "suffer_from_ezcema_to_the_scalp?", default: false
+    t.boolean "have_a_sensitive_scalp?", default: false
+    t.boolean "any_known_allergies?", default: false
+    t.text "which_ones?", default: "unanswered"
+    t.boolean "frequently_swim_or_go_to_the_gym?", default: false
+    t.boolean "currently_have_colour_in_your_hair?", default: false
+    t.text "last_time_colored?", default: "unanswered"
+    t.boolean "used_hair_extensions_before?", default: false
+    t.text "which_type_did_you_use?", default: "unanswered"
+    t.boolean "have_a_perm_or_relaxer?", default: false
+    t.text "last_time_you_had_a_relaxer?", default: "unanswered"
+    t.text "wash_frequency?", default: "unanswered"
+    t.string "hair_type", default: "unanswered"
+    t.string "hair_is", default: "noresponse"
     t.bigint "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "stylist_id"
-    t.string "length"
-    t.boolean "been_pregnant_in_the_last_6_months?"
-    t.text "which_method?"
+    t.string "length", default: "unknown"
+    t.boolean "been_pregnant_in_the_last_6_months?", default: false
+    t.text "which_method?", default: "unanswered"
     t.bigint "hair_personality_id"
     t.index ["hair_personality_id"], name: "index_hair_cards_on_hair_personality_id"
     t.index ["stylist_id"], name: "index_hair_cards_on_stylist_id"
@@ -123,7 +123,7 @@ ActiveRecord::Schema.define(version: 2019_02_27_164932) do
     t.string "home"
     t.string "mobile"
     t.string "street_1"
-    t.string "street_2"
+    t.string "street_2", default: "none"
     t.string "city"
     t.string "state"
     t.string "zip"

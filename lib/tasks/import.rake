@@ -2,7 +2,7 @@ require 'csv'
 require 'byebug'
 
 namespace :import do
-  
+
   desc "import salons from csv"
   task salons: :environment do
     filename = File.join Rails.root, "db/csv/salons.csv"
@@ -22,17 +22,17 @@ namespace :import do
     end
   end
 
-  desc "import service_types from csv" 
+  desc "import service_types from csv"
   task service_types: :environment do
     filename = File.join Rails.root, "db/csv/service_types.csv"
 
     CSV.foreach(filename, headers: true) do |row|
       ServiceType.create(name: row['name'], price: row['price'].to_f, service_id: row['service_id'].to_i)
-    end 
+    end
   end
 
   desc "import service_products from csv"
-  task service_products: :environment do 
+  task service_products: :environment do
     filename = File.join Rails.root, "db/csv/service_products.csv"
 
     CSV.foreach(filename, headers: true) do |row|
@@ -45,7 +45,7 @@ namespace :import do
     filename = File.join Rails.root, "db/csv/products.csv"
 
     CSV.foreach(filename, headers: true) do |row|
-   
+
       Product.create(name: row['name'], size: row['size'], quantity: row["quantity"].to_i, cost: row["cost"].to_f, product_category_id: row['product_category_id'])
     end
   end
@@ -73,7 +73,7 @@ namespace :import do
     filename = File.join Rails.root, "db/csv/profiles.csv"
 
     CSV.foreach(filename, headers: true) do |row|
-      Profile.create(first_name: row['firstname'], last_name: row['last_name'], birthday: row['birthday'], email: row['email'], home: row['home'], mobile: row['mobile'], street_1: row['street_1'], street_2: row['street_2'], city: row['city'], state: row['state'], zip: row['zip'], user_id: row['user_id'].to_i)
+      Profile.create(first_name: row['first_name'], last_name: row['last_name'], birthday: row['birthday'], email: row['email'], home: row['home'], mobile: row['mobile'], street_1: row['street_1'], street_2: row['street_2'], city: row['city'], state: row['state'], zip: row['zip'], user_id: row['user_id'].to_i)
     end
   end
 
@@ -82,16 +82,16 @@ namespace :import do
     filename = File.join Rails.root, "db/csv/hair_cards.csv"
 
     CSV.foreach(filename, headers: true) do |row|
-    
-      HairCard.create(suffered_from_hair_loss?:	row['suffered_from_hair_loss?'],been_diagnosed_with_alopecia?:row['been_diagnosed_with_alopecia?'], take_any_medication?: row['take_any_medication?'],	been_pregnant_in_the_last_6_months?:	row['been_pregnant_in_the_last_6_months?'], suffer_from_psoriasis_to_the_scalp?:	row['suffer_from_psoriasis_to_the_scalp?'], suffer_from_ezcema_to_the_scalp?:
-      row['suffer_from_ezcema_to_the_scalp?'],	have_a_sensitive_scalp?: row['	have_a_sensitive_scalp?'],	any_known_allergies?:	 row['any_known_allergies?'], which_ones?: row['which_ones?'],	frequently_swim_or_go_to_the_gym?: row['frequently_swim_or_go_to_the_gym?'], 	currently_have_colour_in_your_hair?:	row['currently_have_colour_in_your_hair?'], which_method?:	row['which_method?'], last_time_colored?:	row['last_time_colored?'], used_hair_extensions_before?:	row['used_hair_extensions_before?'], which_type_did_you_use?: row['which_type_did_you_use?'],	have_a_perm_or_relaxer?: row['have_a_perm_or_relaxer?'], last_time_you_had_a_relaxer?:	row['last_time_you_had_a_relaxer?'], wash_frequency?:	row['wash_frequency?'],hair_type: row['hair_type'], hair_is:	row['hair_is'], length:	row['length'], user_id:	row['user_id'].to_i, stylist_id:	row['stylist_id'].to_i, hair_personality_id: row['hair_personality_id'].to_i)
+
+      HairCard.create(suffered_from_hair_loss?:	row['suffered_from_hair_loss?'], been_diagnosed_with_alopecia?: row['been_diagnosed_with_alopecia?'], take_any_medication?: row['take_any_medication?'],	been_pregnant_in_the_last_6_months?:	row['been_pregnant_in_the_last_6_months?'], suffer_from_psoriasis_to_the_scalp?:	row['suffer_from_psoriasis_to_the_scalp?'], suffer_from_ezcema_to_the_scalp?:
+      row['suffer_from_ezcema_to_the_scalp?'],	have_a_sensitive_scalp?: row['have_a_sensitive_scalp?'],	any_known_allergies?:	 row['any_known_allergies?'], which_ones?: row['which_ones?'],	frequently_swim_or_go_to_the_gym?: row['frequently_swim_or_go_to_the_gym?'], 	currently_have_colour_in_your_hair?:	row['currently_have_colour_in_your_hair?'], which_method?:	row['which_method?'], last_time_colored?:	row['last_time_colored?'], used_hair_extensions_before?:	row['used_hair_extensions_before?'], which_type_did_you_use?: row['which_type_did_you_use?'],	have_a_perm_or_relaxer?: row['have_a_perm_or_relaxer?'], last_time_you_had_a_relaxer?:	row['last_time_you_had_a_relaxer?'], wash_frequency?:	row['wash_frequency?'],hair_type: row['hair_type'], hair_is:	row['hair_is'], length:	row['length'], user_id:	row['user_id'].to_i, stylist_id:	row['stylist_id'].to_i, hair_personality_id: row['hair_personality_id'].to_i)
     end
   end
 
   desc "import hair_personalities from csv"
   task hair_personalities: :environment do
     filename = File.join Rails.root, "db/csv/hair_personalities.csv"
-    
+
     CSV.foreach(filename, headers: true) do |row|
       HairPersonality.create(name: row['name'], description: row['description'])
     end

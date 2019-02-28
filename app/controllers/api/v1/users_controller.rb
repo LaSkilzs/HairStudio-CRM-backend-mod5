@@ -3,17 +3,16 @@ module Api
     class UsersController < ApplicationController
 
       def index
-        @users = User.all
-        render json: @users
+        # @users = User.all
+        render json: User.all
       end
 
       def create
-        @user = User.new(username: params[:username], image: params[:image], password: params[:password], role: params[:role], salon_id: params[:salon_id])
-     
+        @user = User.new(user_params)
         if @user.save
           render json: @user
         else
-          render json: {errors: @user.errors}
+          render json: {errors: @user.errors.full_messages}
         end
       end
 
@@ -22,7 +21,7 @@ module Api
         if @user && @user.authenticate(params[:password])
           render json: @user
         else
-          render json: {errors: @user.errors}
+          render json: {errors: @user.errors.full_messages}
         end
       end
 
@@ -32,7 +31,7 @@ module Api
         if @user.update(user_params)
           render json: @user
         else
-          render json: {errors: @user.errors}
+          render json: {errors: @user.errors.full_messages}
         end
       end
 
@@ -44,9 +43,9 @@ module Api
 
       private
 
-      # def user_params
-      #   params.require(:user).permit(:username, :image, :password, :role, :salon_id)
-      # end
+      def user_params
+        params.permit(:username, :image, :password, :role, :salon_id)
+      end
 
     end
   end

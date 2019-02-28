@@ -12,4 +12,8 @@ class Profile < ApplicationRecord
   validates :zip, presence: true, length: { is: 5, message: 'zip requires 5 digits'}
   validates :email, presence: true, uniqueness: true, format: { with:  /\A[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]+\z/, message: 'The format of Email is Invalid'}
 
+  def full_name
+    self.first_name + " " + self.last_name
+  end
+
 end
