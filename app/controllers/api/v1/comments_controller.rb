@@ -1,12 +1,15 @@
 module Api
   module V1
     class CommentsController < ApplicationController
+      def index
+        @comments = Comment.all
+        render json: @comments
+      end
 
       def create
         @comment = Comment.new(comment_params)
-        conversation = Conversation.find(comment_params[:coversation_id])
+        conversation = Conversation.find(comment_params[:conversation_id])
         if @comment.save
-          render json: @comment
           CommentsChannel.broadcast_to conversation, @comment
           head :ok
         else
@@ -14,11 +17,11 @@ module Api
         end
       end
 
-      
+
       private
 
       def comment_params
-        params.permit(:text, :conversation_id)
+        params.require(:comment).permit(:text, :conversation_id)
       end
 
     end

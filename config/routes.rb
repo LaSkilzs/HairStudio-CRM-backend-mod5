@@ -8,7 +8,7 @@ Rails.application.routes.draw do
       resources :galleries, only: [:index]
       resources :messages, only: [:create, :index]
       resources :conversations, only: [:index, :create]
-      resources :comments, only: [:create]
+      resources :comments, only: [:index, :create]
       post '/login', to: 'users#login'
     end
   end
