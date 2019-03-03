@@ -6,6 +6,8 @@ Rails.application.routes.draw do
       resources :salons, only: [:index]
       resources :services, only: [:index]
       resources :users
+      resources :galleries, only: [:index]
+      resources :messages, only: [:create, :index]
       post '/login', to: 'users#login'
     end
   end

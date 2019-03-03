@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_02_28_135627) do
+ActiveRecord::Schema.define(version: 2019_03_03_001908) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -60,22 +60,22 @@ ActiveRecord::Schema.define(version: 2019_02_28_135627) do
   end
 
   create_table "hair_cards", force: :cascade do |t|
-    t.boolean "suffered_from_hair_loss?", default: false
-    t.boolean "been_diagnosed_with_alopecia?", default: false
-    t.boolean "take_any_medication?", default: false
-    t.boolean "suffer_from_psoriasis_to_the_scalp?", default: false
-    t.boolean "suffer_from_ezcema_to_the_scalp?", default: false
-    t.boolean "have_a_sensitive_scalp?", default: false
-    t.boolean "any_known_allergies?", default: false
-    t.text "which_ones?", default: "unanswered"
-    t.boolean "frequently_swim_or_go_to_the_gym?", default: false
-    t.boolean "currently_have_colour_in_your_hair?", default: false
-    t.text "last_time_colored?", default: "unanswered"
-    t.boolean "used_hair_extensions_before?", default: false
-    t.text "which_type_did_you_use?", default: "unanswered"
-    t.boolean "have_a_perm_or_relaxer?", default: false
-    t.text "last_time_you_had_a_relaxer?", default: "unanswered"
-    t.text "wash_frequency?", default: "unanswered"
+    t.boolean "suffered_from_hair_loss", default: false
+    t.boolean "been_diagnosed_with_alopecia", default: false
+    t.boolean "take_any_medication", default: false
+    t.boolean "suffer_from_psoriasis_to_the_scalp", default: false
+    t.boolean "suffer_from_ezcema_to_the_scalp", default: false
+    t.boolean "have_a_sensitive_scalp", default: false
+    t.boolean "any_known_allergies", default: false
+    t.text "which_ones", default: "unanswered"
+    t.boolean "frequently_swim_or_go_to_the_gym", default: false
+    t.boolean "currently_have_colour_in_your_hair", default: false
+    t.text "last_time_colored", default: "unanswered"
+    t.boolean "used_hair_extensions_before", default: false
+    t.text "which_type_did_you_use", default: "unanswered"
+    t.boolean "have_a_perm_or_relaxer", default: false
+    t.text "last_time_you_had_a_relaxer", default: "unanswered"
+    t.text "wash_frequency", default: "unanswered"
     t.string "hair_type", default: "unanswered"
     t.string "hair_is", default: "noresponse"
     t.bigint "user_id"
@@ -83,8 +83,8 @@ ActiveRecord::Schema.define(version: 2019_02_28_135627) do
     t.datetime "updated_at", null: false
     t.bigint "stylist_id"
     t.string "length", default: "unknown"
-    t.boolean "been_pregnant_in_the_last_6_months?", default: false
-    t.text "which_method?", default: "unanswered"
+    t.boolean "been_pregnant_in_the_last_6_months", default: false
+    t.text "which_method", default: "unanswered"
     t.bigint "hair_personality_id"
     t.index ["hair_personality_id"], name: "index_hair_cards_on_hair_personality_id"
     t.index ["stylist_id"], name: "index_hair_cards_on_stylist_id"
@@ -96,6 +96,17 @@ ActiveRecord::Schema.define(version: 2019_02_28_135627) do
     t.string "description"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "messages", force: :cascade do |t|
+    t.string "name"
+    t.string "email"
+    t.string "phone"
+    t.text "message"
+    t.bigint "salon_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["salon_id"], name: "index_messages_on_salon_id"
   end
 
   create_table "product_categories", force: :cascade do |t|
@@ -205,6 +216,7 @@ ActiveRecord::Schema.define(version: 2019_02_28_135627) do
   add_foreign_key "hair_cards", "hair_personalities"
   add_foreign_key "hair_cards", "users"
   add_foreign_key "hair_cards", "users", column: "stylist_id"
+  add_foreign_key "messages", "salons"
   add_foreign_key "products", "product_categories"
   add_foreign_key "profiles", "users"
   add_foreign_key "service_products", "products"

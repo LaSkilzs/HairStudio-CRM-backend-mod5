@@ -1,6 +1,7 @@
 class Salon < ApplicationRecord
   has_many :users
   has_many :services
+  has_many :messages
 
   validates :name, presence: true
   validates :street_1, presence: true
