@@ -1,7 +1,7 @@
 module Api
   module V1
     class AppointmentsController < ApplicationController
-      
+
       def index
         @appointments = Appointment.all
         render json: @appointments
