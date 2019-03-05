@@ -10,7 +10,7 @@ Rails.application.routes.draw do
       resources :conversations, only: [:index, :create]
       resources :comments, only: [:index, :create]
       post '/login', to: 'auth#login'
-      get '/profile', to: 'users#profile'
+      get '/auth', to: 'users#authenticate'
     end
   end
   mount ActionCable.server => '/cable'

@@ -20,16 +20,6 @@ module Api
         end
       end
 
-      def login
-        @user = User.find_by(username: params[:username])
-        if @user && @user.authenticate(params[:password])
-          payload = {user_id: @user.id}
-          token = JWT.encode(payload, ENV['SECRET'])
-          render json: { user: @user, jwt: token, profile: @user.profiles, appointments: @user.appointments}
-        else
-          render json: {errors: @user.errors.full_messages}
-        end
-      end
 
       def update
           @user = User.find(params[:id])
@@ -46,7 +36,7 @@ module Api
          decoded_token = JWT.decode(token, ENV['SECRET'], true, {algorithm: 'HS256'})
          user_id = decoded_token[0]["user_id"]
          user = User.find(user_id)
-         render json: {user: user}
+         render json: {user: UserSerializer.new(user)}
       end
 
 
@@ -56,8 +46,6 @@ module Api
         @user.destroy
         render json: 204
       end
-
-
 
       private
       def user_params
