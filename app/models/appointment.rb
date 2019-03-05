@@ -7,10 +7,6 @@ class Appointment < ApplicationRecord
   has_many :service_requests
   has_many :service_types, through: :service_requests
 
-  def set_time
-    self.start_time.min.to_s.length < 2 ? min = self.start_time.min.to_s + "0" : min = self.start_time.min.to_s
-    self.start_time.hour.to_s + ":" + min
-  end
 
   def name
     user = User.find(self.user_id)

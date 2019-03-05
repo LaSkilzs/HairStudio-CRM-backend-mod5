@@ -9,8 +9,8 @@ Rails.application.routes.draw do
       resources :messages, only: [:create, :index]
       resources :conversations, only: [:index, :create]
       resources :comments, only: [:index, :create]
-      post '/login', to: 'users#login'
-      get '/auth', to: 'users#authenticate'
+      post '/login', to: 'auth#login'
+      get '/profile', to: 'users#profile'
     end
   end
   mount ActionCable.server => '/cable'
