@@ -35,11 +35,11 @@ module Api
 
       def authenticate
          authHeader = request.headers['Authorization']
-         token = authHeader.gsub(/"/,"").split(" ")[1]
+         token = authHeader.split(" ")[1]
          decoded_token = JWT.decode(token, ENV['SECRET'], true, {algorithm: 'HS256'})
          user_id = decoded_token[0]["user_id"]
          user= User.find(user_id)
-         render json: {user: user, profiles: user.profiles, appointments: user.appointments}
+         render json: {user: user}
       end
 
       def destroy

@@ -12,8 +12,8 @@ module Api
         serialized_data = ConversationSerializer.new(@conversation)
 
         if @conversation.save
-          ActionCable.server.broadcast 'conversations_channel', serialized_data
-          head :ok, json: @conversation
+          ActionCable.server.broadcast 'conversations_channel', @conversation
+          head :ok
         else
           render json: {errors: @conversation.errors.full_messages}
         end
