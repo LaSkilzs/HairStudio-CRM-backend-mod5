@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_03_03_143647) do
+ActiveRecord::Schema.define(version: 2019_03_06_200917) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -24,7 +24,8 @@ ActiveRecord::Schema.define(version: 2019_03_03_143647) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "stylist_id"
-    t.string "duration"
+    t.integer "duration", default: 90
+    t.string "hairstyle", default: "Wash n Style"
     t.index ["stylist_id"], name: "index_appointments_on_stylist_id"
     t.index ["user_id"], name: "index_appointments_on_user_id"
   end
@@ -90,8 +91,8 @@ ActiveRecord::Schema.define(version: 2019_03_03_143647) do
     t.boolean "have_a_perm_or_relaxer", default: false
     t.text "last_time_you_had_a_relaxer", default: "unanswered"
     t.text "wash_frequency", default: "unanswered"
-    t.string "hair_type", default: "unanswered"
-    t.string "hair_is", default: "noresponse"
+    t.string "hair_type", default: "regular"
+    t.string "hair_is", default: "normal"
     t.bigint "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

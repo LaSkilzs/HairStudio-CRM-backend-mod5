@@ -4,4 +4,5 @@ class UserSerializer < ActiveModel::Serializer
   has_many :profiles
   has_many :hair_cards
   has_many :hair_personalities, through: :hair_cards
+  has_many :appointments
 end
