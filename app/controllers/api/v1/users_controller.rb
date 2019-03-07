@@ -12,7 +12,7 @@ module Api
         @user = User.new(user_params)
         if @user.save
 
-          token = JWT.encode(payload, ENV['SECRET'])
+          token = JWT.encode({user_id: @user.id}, ENV['SECRET'])
           # render json: { user: @user, jwt: token}
           render json: { user: UserSerializer.new(@user), jwt: token }, status: :created
         else
