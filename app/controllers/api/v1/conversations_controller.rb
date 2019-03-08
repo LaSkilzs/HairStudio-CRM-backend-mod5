@@ -13,7 +13,7 @@ module Api
 
         if @conversation.save
           ActionCable.server.broadcast 'conversations_channel', @conversation
-          head :ok
+          head :ok, json: {status: "Success"}
         else
           render json: {errors: @conversation.errors.full_messages}
         end
