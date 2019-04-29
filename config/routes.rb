@@ -9,6 +9,10 @@ Rails.application.routes.draw do
       resources :messages, only: [:create, :index]
       resources :conversations, only: [:index, :create]
       resources :comments, only: [:index, :create]
+      resources :service_types, only: [:index]
+      resources :hair_cards
+      resources :hair_personalities
+      resources :profiles
       post '/login', to: 'auth#login'
       get '/auth', to: 'users#authenticate'
     end
