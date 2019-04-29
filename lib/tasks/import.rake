@@ -27,7 +27,7 @@ namespace :import do
     filename = File.join Rails.root, "db/csv/service_types.csv"
 
     CSV.foreach(filename, headers: true) do |row|
-      ServiceType.create(name: row['name'], price: row['price'].to_f, service_id: row['service_id'].to_i)
+      ServiceType.create(name: row['name'], sprice: row['price'].to_f, service_id: row['service_id'].to_i)
     end
   end
 
